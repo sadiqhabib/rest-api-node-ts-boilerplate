@@ -1,7 +1,13 @@
+import Debug from "debug";
 import * as mongoose from "mongoose";
-const Schema = mongoose.Schema;
+import Cache from "../../config/cache";
 
-const UserSchema = Schema(
+const debug = Debug("app:user")
+const Schema = mongoose.Schema;
+const Collection = "User";
+const CacheCollection = mongoose.pluralize()(Collection);
+
+const UserSchema = new Schema(
   {
     name: {
       type: String,
@@ -31,4 +37,14 @@ const UserSchema = Schema(
   }
 );
 
-export default mongoose.model("User", UserSchema);
+UserSchema.post('save', (user) => {
+  debug('%s has been saved', user._id);
+  Cache.getClient().hset(CacheCollection, user._id, JSON.stringify(user));
+});
+
+UserSchema.post("remove", (user) => {
+  debug('%s has been removed', user._id);
+  Cache.getClient().hdel(CacheCollection, user._id);
+});
+
+export default mongoose.model(Collection, UserSchema);

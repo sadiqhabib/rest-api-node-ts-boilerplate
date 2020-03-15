@@ -1,0 +1,39 @@
+### Variables
+@user = { "name": "Test", "lastName": "User 4", "email": "testuser@email.com", "password": "password" }
+@userid = 5e6e0601275dff3b25927086
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQGVtYWlsLmNvbSIsImlhdCI6MTU4NDI2ODg5NiwiZXhwIjoxNTg0MjcyNDk2fQ.tUcU-T49b49zQUSs3z0CAPSL1Pjba33ZAYVW203i40w
+
+
+### Register user given their email and password, returns the token upon successful registration
+POST  http://localhost:3000/v1/register
+content-type: application/json
+
+{{user}}
+
+### Register user given their email and password, returns the token upon successful registration
+POST http://localhost:3000/v1/authenticate
+content-type: application/json
+accept-language: de
+
+{{user}}
+
+### Get users list
+GET http://localhost:3000/v1/users
+
+
+### Get authenticated user given the token
+GET  http://localhost:3000/v1/users/{{userid}}
+Authorization: Bearer {{token}}
+
+### Update user
+PUT  http://localhost:3000/v1/users/{{userid}}
+Authorization: Bearer {{token}}
+content-type: application/json
+accept-language: de
+
+{{user}}
+
+### Delete user
+DELETE  http://localhost:3000/v1/users/{{userid}}
+Authorization: Bearer {{token}}
+accept-language: de

@@ -8,11 +8,11 @@ export default class UserController {
   public authenticate = async (req: Request, res: Response): Promise<any> => {
     const { email, password } = req.body;
     try {
-      const user = await User.findOne({ email: req.body.email });
+      const user: any = await User.findOne({ email: req.body.email });
       if (!user) {
         return res.status(404).send({
           success: false,
-          message: 'User not found'
+          message: (res as any).__('User not found')
         });
       }
 

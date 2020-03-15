@@ -1,7 +1,4 @@
-import * as bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
-import * as jwt from 'jwt-then';
-import config from '../../config/config';
 import User from './user.model';
 
 export default class UserController {
@@ -56,28 +53,24 @@ export default class UserController {
   public update = async (req: Request, res: Response): Promise<any> => {
     const { name, lastName, email, password } = req.body;
     try {
-      const userUpdated = await User.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: {
-            name,
-            lastName,
-            email,
-            password
-          }
-        },
-        { new: true }
-      );
-      if (!userUpdated) {
+      const user = await User.findById(req.params.id);
+      if (!user) {
         return res.status(404).send({
           success: false,
-          message: 'User not found',
+          message: (res as any).__('User not found'),
           data: null
         });
       }
+      const data = { name, lastName, email, password };
+      for (const key in data) {
+        if (data[key] !== undefined) {
+          user[key] = data[key];
+        }
+      }
+      await user.save();
       res.status(200).send({
         success: true,
-        data: userUpdated
+        data: user
       });
     } catch (err) {
       res.status(500).send({
@@ -90,15 +83,16 @@ export default class UserController {
 
   public remove = async (req: Request, res: Response): Promise<any> => {
     try {
-      const user = await User.findByIdAndRemove(req.params.id);
+      const user = await User.findById(req.params.id);
 
       if (!user) {
         return res.status(404).send({
           success: false,
-          message: 'User not found',
+          message: (res as any).__('User not found'),
           data: null
         });
       }
+      await user.remove();
       res.status(204).send();
     } catch (err) {
       res.status(500).send({

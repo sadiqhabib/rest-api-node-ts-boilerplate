@@ -3,7 +3,9 @@ import * as cors from 'cors';
 import * as express from 'express';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
+
 import apiV1 from './apiV1/index';
+import i18n from "./config/i18n";
 import * as errorHandler from './helpers/errorHandler';
 
 class App {
@@ -22,6 +24,7 @@ class App {
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
     this.express.use(helmet());
+    this.express.use(i18n.init);
   }
 
   private setRoutes(): void {

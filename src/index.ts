@@ -1,5 +1,8 @@
 import app from './App';
 import CONFIG from './config/config';
+
+// Bootstrap
+import './config/cache';
 import './config/db';
 
 const PORT = CONFIG.PORT;
