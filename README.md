@@ -6,18 +6,23 @@ This is a boilerplate for building scalable and robust REST APIs using Node.js &
 
 ## Table of Contents
 
-- [Prerequisites](#prerequisites)
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Installation](#installation)
-  - [Directory Structure](#directory-structure)
-  - [Available Routes](#available-routes)
-  - [Available Scripts](#available-scripts)
-- [License](#license)
+- [RESTful API using Node.js, Express, Mongoose & TypeScript](#restful-api-using-nodejs-express-mongoose--typescript)
+  - [Table of Contents](#table-of-contents)
+  - [Prerequisites](#prerequisites)
+  - [Features](#features)
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+    - [Directory Structure](#directory-structure)
+    - [Available routes](#available-routes)
+    - [Available scripts](#available-scripts)
+  - [License](#license)
 
 ## Prerequisites
 
-You need to install [MongoDB](https://docs.mongodb.com/manual/administration/install-community/) either on your local machine or using a cloud service as [mLab](https://mlab.com/).
+You need to install
+  * [MongoDB](https://docs.mongodb.com/manual/administration/install-community/) either on your local machine or using a cloud service as [mLab](https://mlab.com/).
+  * [Redis Server](https://redis.io/download)
+  * [REST-CLIENT](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) plugin if your are using vs code editor
 
 ## Features
 
